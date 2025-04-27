@@ -1,0 +1,67 @@
+{
+  "log": {
+    "loglevel": "warn"
+  },
+  "inbounds": [
+    {
+      "tag": "VLESS TCP VISION REALITY",
+      "listen": "0.0.0.0",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "email": "user",
+            "id": "$UUID",
+            "flow": "xtls-rprx-vision"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "xver": 1,
+          "dest": "127.0.0.1:4123",
+          "serverNames": ["$VLESS_DOMAIN"],
+          "privateKey": "$PRIVATE_KEY",
+          "shortIds": ["$SHORT_ID"]
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"],
+        "routeOnly": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "direct",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "protocol": "bittorrent",
+        "outboundTag": "block"
+      }
+    ],
+    "domainStrategy": "IPIfNonMatch"
+  },
+  "dns": {
+    "servers": ["1.1.1.1", "8.8.8.8"],
+    "queryStrategy": "UseIPv4",
+    "disableFallback": false,
+    "tag": "dns-aux"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  https_port 4123
+  default_bind 127.0.0.1
+  servers {
+    listener_wrappers {
+      proxy_protocol {
+        allow 127.0.0.1/32
+      }
+      tls
+    }
+  }
+  auto_https disable_redirects
+}
+
+https://{$VLESS_DOMAIN} {
+  root * /srv
+  file_server
+
+  handle /api/* {
+    reverse_proxy 127.0.0.1:3000 {
+      header_up Host {host}
+      header_up X-Real-IP {remote}
+      header_up X-Forwarded-For {remote}
+      header_up X-Forwarded-Proto {scheme}
+    }
+  }
+}
+
+http://{$VLESS_DOMAIN} {
+  bind 0.0.0.0
+  redir https://{$VLESS_DOMAIN}{uri} permanent
+}
+
+:4123 {
+  tls internal
+  respond 204
+}
+
+:80 {
+  bind 0.0.0.0
+  respond 204
+}

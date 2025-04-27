@@ -1,0 +1,41 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "inbounds": [
+    {
+      "tag": "VLESS TCP VISION REALITY",
+      "type": "vless",
+      "listen": "0.0.0.0",
+      "listen_port": 443,
+      "users": [
+        {
+          "name": "user",
+          "uuid": "$UUID",
+          "flow": "xtls-rprx-vision"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "$VLESS_DOMAIN",
+        "reality": {
+          "enabled": true,
+          "handshake": {
+            "server": "127.0.0.1",
+            "server_port": 4123
+          },
+          "private_key": "$PRIVATE_KEY",
+          "short_id": ["$SHORT_ID"]
+        }
+      }
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "bittorrent",
+        "action": "reject"
+      }
+    ]
+  }
+}
