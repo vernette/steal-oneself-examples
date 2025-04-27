@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Вход в Confluence</title>
+    <title>Confluence</title>
     <style>
       body {
         font-family:
@@ -191,6 +191,7 @@
             forgotPasswordText:
               "Для восстановления доступа обратитесь к администратору.",
             errorMessage: "Неправильное имя пользователя или пароль.",
+            authFailedMessage: "Ошибка аутентификации",
           },
           en: {
             loginTitle: "Login to Confluence",
@@ -204,6 +205,7 @@
             forgotPasswordText:
               "To recover access, please contact your administrator.",
             errorMessage: "Incorrect username or password.",
+            authFailedMessage: "Authentication failed",
           },
         };
 
@@ -220,7 +222,6 @@
         document.getElementById("create-link").innerText =
           elements[lang].createLink;
 
-        // Устанавливаем тексты для модальных окон и сообщений об ошибках
         document.getElementById("create-link").dataset.modalText =
           elements[lang].createAccountText;
         document.getElementById("forgot-link").dataset.modalText =
@@ -269,7 +270,7 @@
         }
       };
 
-      document.getElementById("login-form").onsubmit = function (event) {
+      document.getElementById("login-form").onsubmit = async function (event) {
         event.preventDefault();
         var username = document.getElementById("username");
         var password = document.getElementById("password");
@@ -293,7 +294,40 @@
           return;
         }
 
-        errorMessage.style.display = "block";
+        try {
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: username.value.trim(),
+              password: password.value.trim(),
+            }),
+          });
+
+          const data = await response.json();
+
+          if (data.code === "AUTH_SUCCESS") {
+            window.location.href = "/profile";
+            return;
+          }
+
+          if (data.code === "AUTH_FAILED") {
+            username.classList.add("error");
+            password.classList.add("error");
+            errorMessage.innerText = data.message;
+            errorMessage.style.display = "block";
+            return;
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          errorMessage.innerText =
+            document.documentElement.lang === "ru"
+              ? "Произошла ошибка при попытке входа"
+              : "An error occurred while trying to log in";
+          errorMessage.style.display = "block";
+        }
       };
 
       window.onclick = function (event) {
