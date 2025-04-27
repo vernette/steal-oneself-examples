@@ -12,11 +12,11 @@
   auto_https disable_redirects
 }
 
-https://{$VLESS_DOMAIN} {
+https://$VLESS_DOMAIN {
   root * /srv
   file_server
 
-  handle /api/* {
+  handle /api/profile {
     reverse_proxy 127.0.0.1:3000 {
       header_up Host {host}
       header_up X-Real-IP {remote}
@@ -24,11 +24,16 @@ https://{$VLESS_DOMAIN} {
       header_up X-Forwarded-Proto {scheme}
     }
   }
+
+  handle_path /profile {
+    header Content-Type text/html
+    respond "<center><h1>403 Forbidden</h1><p>You cannot access this resource.</p></center>" 403
+  }
 }
 
-http://{$VLESS_DOMAIN} {
+http://$VLESS_DOMAIN {
   bind 0.0.0.0
-  redir https://{$VLESS_DOMAIN}{uri} permanent
+  redir https://$VLESS_DOMAIN{uri} permanent
 }
 
 :4123 {
