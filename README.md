@@ -1,6 +1,6 @@
 This repository contains examples of setting up self-steal configurations using Xray and sing-box in Docker.
 
-Both setups use a fake Confluence login page, but you can use any page you like.
+Both setups use a fake Confluence login page, but you can use any page you like in `caddy/templates/index.html`
 
 Based on Akiyamov [xray-vps-setup](https://github.com/Akiyamov/xray-vps-setup)
 
@@ -74,9 +74,9 @@ Replace `$UUID`, `$PRIVATE_KEY`, `$SHORT_ID` and `$VLESS_DOMAIN` in `xray/config
 "inbounds": [
   {
     "tag": "VLESS TCP VISION REALITY",
+    "protocol": "vless",
     "listen": "0.0.0.0",
     "port": 443,
-    "protocol": "vless",
     "settings": {
       "clients": [
         {
