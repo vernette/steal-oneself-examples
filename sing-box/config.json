@@ -21,7 +21,7 @@
         "reality": {
           "enabled": true,
           "handshake": {
-            "server": "127.0.0.1",
+            "server": "caddy",
             "server_port": 4123
           },
           "private_key": "$PRIVATE_KEY",

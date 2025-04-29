@@ -57,11 +57,5 @@
       }
     ],
     "domainStrategy": "IPIfNonMatch"
-  },
-  "dns": {
-    "servers": ["1.1.1.1", "8.8.8.8"],
-    "queryStrategy": "UseIPv4",
-    "disableFallback": false,
-    "tag": "dns-aux"
   }
 }
