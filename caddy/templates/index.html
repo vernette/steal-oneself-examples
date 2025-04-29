@@ -93,7 +93,7 @@
       .help-links a:hover {
         text-decoration: underline;
       }
-      /* Стили для модального окна */
+
       .modal {
         display: none;
         position: fixed;
@@ -191,7 +191,6 @@
             forgotPasswordText:
               "Для восстановления доступа обратитесь к администратору.",
             errorMessage: "Неправильное имя пользователя или пароль.",
-            authFailedMessage: "Ошибка аутентификации",
           },
           en: {
             loginTitle: "Login to Confluence",
@@ -205,7 +204,6 @@
             forgotPasswordText:
               "To recover access, please contact your administrator.",
             errorMessage: "Incorrect username or password.",
-            authFailedMessage: "Authentication failed",
           },
         };
 
@@ -270,7 +268,7 @@
         }
       };
 
-      document.getElementById("login-form").onsubmit = async function (event) {
+      document.getElementById("login-form").onsubmit = function (event) {
         event.preventDefault();
         var username = document.getElementById("username");
         var password = document.getElementById("password");
@@ -294,40 +292,7 @@
           return;
         }
 
-        try {
-          const response = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username: username.value.trim(),
-              password: password.value.trim(),
-            }),
-          });
-
-          const data = await response.json();
-
-          if (data.code === "AUTH_SUCCESS") {
-            window.location.href = "/profile";
-            return;
-          }
-
-          if (data.code === "AUTH_FAILED") {
-            username.classList.add("error");
-            password.classList.add("error");
-            errorMessage.innerText = data.message;
-            errorMessage.style.display = "block";
-            return;
-          }
-        } catch (error) {
-          console.error("Error:", error);
-          errorMessage.innerText =
-            document.documentElement.lang === "ru"
-              ? "Произошла ошибка при попытке входа"
-              : "An error occurred while trying to log in";
-          errorMessage.style.display = "block";
-        }
+        errorMessage.style.display = "block";
       };
 
       window.onclick = function (event) {

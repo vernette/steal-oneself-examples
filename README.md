@@ -1,4 +1,4 @@
-This repository contains examples of setting up self-steal configurations using Xray and sing-box in Docker. Both setups use a fake Confluence login page with fake API as camouflage.
+This repository contains examples of setting up self-steal configurations using Xray and sing-box in Docker. Both setups use a fake Confluence login page as camouflage.
 
 Based on Akiyamov [xray-vps-setup](https://github.com/Akiyamov/xray-vps-setup)
 

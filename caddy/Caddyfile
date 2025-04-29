@@ -15,20 +15,6 @@
 https://$VLESS_DOMAIN {
   root * /srv
   file_server
-
-  handle /api/profile {
-    reverse_proxy 127.0.0.1:3000 {
-      header_up Host {host}
-      header_up X-Real-IP {remote}
-      header_up X-Forwarded-For {remote}
-      header_up X-Forwarded-Proto {scheme}
-    }
-  }
-
-  handle_path /profile {
-    header Content-Type text/html
-    respond "<center><h1>403 Forbidden</h1><p>You cannot access this resource.</p></center>" 403
-  }
 }
 
 http://$VLESS_DOMAIN {

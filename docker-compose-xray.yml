@@ -8,13 +8,6 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/templates:/srv
 
-  fake-backend:
-    container_name: fake-backend
-    image: vernette/fake-backend
-    restart: always
-    ports:
-      - "127.0.0.1:3000:3000"
-
   xray:
     image: ghcr.io/xtls/xray-core:25.1.1
     restart: always
