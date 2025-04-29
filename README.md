@@ -24,7 +24,7 @@ Install Docker:
 bash <(wget -qO- https://get.docker.com)
 ```
 
-If you're using non-root account and you want to run Docker without sudo, add your user to the docker group:
+If you're using non-root account and you want to run Docker commands without sudo, add your user to the docker group:
 
 ```bash
 sudo groupadd docker
@@ -92,7 +92,7 @@ Replace `$UUID`, `$PRIVATE_KEY`, `$SHORT_ID` and `$VLESS_DOMAIN` in `xray/config
       "security": "reality",
       "realitySettings": {
         "xver": 1,
-        "dest": "127.0.0.1:4123",
+        "dest": "caddy:4123",
         "serverNames": ["$VLESS_DOMAIN"],
         "privateKey": "$PRIVATE_KEY",
         "shortIds": ["$SHORT_ID"]
@@ -156,7 +156,7 @@ Replace `$UUID`, `$PRIVATE_KEY`, `$SHORT_ID` and `$VLESS_DOMAIN` in `sing-box/co
       "reality": {
         "enabled": true,
         "handshake": {
-          "server": "127.0.0.1",
+          "server": "caddy",
           "server_port": 4123
         },
         "private_key": "$PRIVATE_KEY",

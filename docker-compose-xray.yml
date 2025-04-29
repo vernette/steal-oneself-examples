@@ -2,15 +2,25 @@ services:
   caddy:
     image: caddy:2.9
     restart: always
-    network_mode: host
+    ports:
+      - "80:80"
     volumes:
       - ./caddy/data:/data
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/templates:/srv
+    networks:
+      - internal
 
   xray:
     image: ghcr.io/xtls/xray-core:25.1.1
     restart: always
-    network_mode: host
+    ports:
+      - "443:443"
     volumes:
       - ./xray:/etc/xray
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

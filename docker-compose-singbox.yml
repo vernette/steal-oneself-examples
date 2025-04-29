@@ -2,16 +2,26 @@ services:
   caddy:
     image: caddy:2.9
     restart: always
-    network_mode: host
+    ports:
+      - "80:80"
     volumes:
       - ./caddy/data:/data
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/templates:/srv
+    networks:
+      - internal
 
   sing-box:
     image: ghcr.io/sagernet/sing-box:v1.11.8
     restart: always
-    network_mode: host
     command: -D /var/lib/sing-box -C /etc/sing-box/ run sing-box
+    ports:
+      - "443:443"
     volumes:
       - ./sing-box:/etc/sing-box/
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

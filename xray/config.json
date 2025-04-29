@@ -23,7 +23,7 @@
         "security": "reality",
         "realitySettings": {
           "xver": 1,
-          "dest": "127.0.0.1:4123",
+          "dest": "caddy:4123",
           "serverNames": ["$VLESS_DOMAIN"],
           "privateKey": "$PRIVATE_KEY",
           "shortIds": ["$SHORT_ID"]
