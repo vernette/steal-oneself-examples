@@ -1,4 +1,4 @@
-This repository contains examples of setting up self-steal configurations using Xray and sing-box in Docker.
+This repository contains examples of setting up steal-oneself configurations using Xray and sing-box in Docker.
 
 Both setups use a fake Confluence login page, but you can use any page you like in `caddy/templates/index.html`
 
