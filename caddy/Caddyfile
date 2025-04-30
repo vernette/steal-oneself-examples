@@ -18,7 +18,6 @@ https://$VLESS_DOMAIN {
 }
 
 http://$VLESS_DOMAIN {
-  bind 0.0.0.0
   redir https://$VLESS_DOMAIN{uri} permanent
 }
 
@@ -28,6 +27,5 @@ http://$VLESS_DOMAIN {
 }
 
 :80 {
-  bind 0.0.0.0
   respond 204
 }
