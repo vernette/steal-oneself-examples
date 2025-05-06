@@ -8,8 +8,6 @@ services:
       - ./caddy/data:/data
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/templates:/srv
-    networks:
-      - internal
 
   sing-box:
     image: ghcr.io/sagernet/sing-box:v1.11.8
@@ -19,9 +17,3 @@ services:
       - "443:443"
     volumes:
       - ./sing-box:/etc/sing-box/
-    networks:
-      - internal
-
-networks:
-  internal:
-    driver: bridge

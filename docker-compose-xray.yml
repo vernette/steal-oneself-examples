@@ -8,8 +8,6 @@ services:
       - ./caddy/data:/data
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/templates:/srv
-    networks:
-      - internal
 
   xray:
     image: ghcr.io/xtls/xray-core:25.1.1
@@ -18,9 +16,5 @@ services:
       - "443:443"
     volumes:
       - ./xray:/etc/xray
-    networks:
-      - internal
-
-networks:
-  internal:
-    driver: bridge
+      # Folder for custom geosite/geoip files
+      # - ./xray_data:/usr/local/share/xray
