@@ -4,7 +4,7 @@
   },
   "inbounds": [
     {
-      "tag": "VLESS TCP VISION REALITY",
+      "tag": "vless-tcp-vision-reality",
       "type": "vless",
       "listen": "0.0.0.0",
       "listen_port": 443,
@@ -32,6 +32,10 @@
   ],
   "route": {
     "rules": [
+      {
+        "inbound": "vless-tcp-vision-reality",
+        "action": "sniff"
+      },
       {
         "protocol": "bittorrent",
         "action": "reject"
