@@ -59,10 +59,10 @@ Generate required values
 
 ```bash
 # Generate private and public keys ($PRIVATE_KEY and $PUBLIC_KEY)
-docker run --rm ghcr.io/xtls/xray-core:25.1.1 x25519
+docker run --rm ghcr.io/xtls/xray-core:25.5.16 x25519
 
 # Generate UUID ($UUID)
-docker run --rm ghcr.io/xtls/xray-core:25.1.1 uuid
+docker run --rm ghcr.io/xtls/xray-core:25.5.16 uuid
 
 # Generate SID ($SHORT_ID)
 openssl rand -hex 8
@@ -125,10 +125,10 @@ Generate required values
 
 ```bash
 # Generate private and public keys ($PRIVATE_KEY and $PUBLIC_KEY)
-docker run --rm ghcr.io/sagernet/sing-box:v1.11.8 generate reality-keypair
+docker run --rm ghcr.io/sagernet/sing-box:v1.11.11 generate reality-keypair
 
 # Generate UUID ($UUID)
-docker run --rm ghcr.io/sagernet/sing-box:v1.11.8 generate uuid
+docker run --rm ghcr.io/sagernet/sing-box:v1.11.11 generate uuid
 
 # Generate SID ($SHORT_ID)
 openssl rand -hex 8
