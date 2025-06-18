@@ -10,7 +10,7 @@ services:
       - ./caddy/templates:/srv
 
   sing-box:
-    image: ghcr.io/sagernet/sing-box:v1.11.11
+    image: ghcr.io/sagernet/sing-box:v1.11.13
     restart: always
     command: -D /var/lib/sing-box -C /etc/sing-box/ run sing-box
     ports:

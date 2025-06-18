@@ -10,7 +10,7 @@ services:
       - ./caddy/templates:/srv
 
   xray:
-    image: ghcr.io/xtls/xray-core:25.5.16
+    image: ghcr.io/xtls/xray-core:25.6.8
     restart: always
     ports:
       - "443:443"
