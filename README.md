@@ -59,10 +59,10 @@ Generate required values
 
 ```bash
 # Generate private and public keys ($PRIVATE_KEY and $PUBLIC_KEY)
-docker run --rm ghcr.io/xtls/xray-core:25.5.16 x25519
+docker run --rm ghcr.io/xtls/xray-core:25.6.8 x25519
 
 # Generate UUID ($UUID)
-docker run --rm ghcr.io/xtls/xray-core:25.5.16 uuid
+docker run --rm ghcr.io/xtls/xray-core:25.6.8 uuid
 
 # Generate SID ($SHORT_ID)
 openssl rand -hex 8

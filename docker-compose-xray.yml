@@ -15,6 +15,6 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./xray:/etc/xray
+      - ./xray:/usr/local/etc/xray/
       # Folder for custom geosite/geoip files
       # - ./xray_data:/usr/local/share/xray
