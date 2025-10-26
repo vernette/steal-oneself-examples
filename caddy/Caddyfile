@@ -1,3 +1,13 @@
+(common_headers) {
+  header {
+    -Server
+    -Alt-Svc
+    -ETag
+    -Last-Modified
+    -Accept-Ranges
+  }
+}
+
 {
   https_port 4123
   default_bind 0.0.0.0
@@ -13,19 +23,23 @@
 }
 
 https://$VLESS_DOMAIN {
+  import common_headers
   root * /srv
   file_server
 }
 
 http://$VLESS_DOMAIN {
+  import common_headers
   redir https://$VLESS_DOMAIN{uri} permanent
 }
 
 :4123 {
+  import common_headers
   tls internal
   respond 204
 }
 
 :80 {
+  import common_headers
   respond 204
 }
